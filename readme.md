@@ -1,11 +1,23 @@
 # Duly Notioned
 
-Using Vercel to drop-in your analytics/page view tracking to embeds! 
+Using Vercel to drop-in your analytics/page view tracking to Notion embeds! 
+# How to use this!
+
+Pretty easy, all you have to do is click this button to deploy this project to Vercel!
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fhello-world)
+
+
+Once you click thru and deploy, go to the dashboard and take note of the production URL. 
+
+Plug that URL into Simple (or another analytics platform if you've edited the HTML file).
+
+Then just embed the URL into each Notion page you want to track, with the path being the identifier you'd like to use like `mytrackingapp.vercel.app/name-of-Notion-page`
 
 - [Duly Notioned](#duly-notioned)
+- [How to use this!](#how-to-use-this)
     - [Right now, this only uses Simple Analytics, the service I personally use because of their respect of users' privacy](#right-now-this-only-uses-simple-analytics-the-service-i-personally-use-because-of-their-respect-of-users-privacy)
 - [Why!](#why)
-- [How to use this!](#how-to-use-this)
 
 This was primarily built for use in Notion, but this could be used in other services that will embed sites. 
 
@@ -19,9 +31,3 @@ I wanted to track some public Notion pages and see how much traction the pages w
 In order to scale, we use Vercel Serverless Functions to serve the HTML file. It's not dynamically creating the HTML file, but by using the serverless functions we have the foundation to modify the file per request later.
 
 The last piece of this system uses url rewriting. Because the web version of Notion sanitizes the URL, we can't use url params or hashes, usually the indentifier to basic tracking. So instead we use pages or url paths as an identifier. So instead of maybe embeding `mytrackingapp.com/?ref=name-of-Notion-page` (which would get sanitized to embedding `mytrackingapp.com/`) we would embed `mytrackingapp.com/name-of-Notion-page`. Usually the static approach might mean making a bunch of folder with the path name, all with the HTML file inside. But since we're using Vercel we can rewrite all URLs to point to an API, where we serve that HTML file.
-
-# How to use this!
-
-Pretty easy, all you have to do is click this button to deploy this project to Vercel!
-
-Once deployed, take note of the production URL. Then just embed the URL, with the path being the identifier you'd like to use like `mytrackingapp.vercel.app/name-of-Notion-page`
